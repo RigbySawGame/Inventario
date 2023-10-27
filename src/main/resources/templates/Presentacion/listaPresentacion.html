@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+        <meta name="generator" content="Hugo 0.118.2">
+
+        <title>Lista de medicamentos</title>
+
+        <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/sidebars/">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+        <!-- Custom styles for this template -->
+        <link href="../sidebars.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+        <link href="../menu.css" rel="stylesheet">
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+        <script src="../sidebars.js"></script>
+        <script src="../assets/js/color-modes.js"></script>
+        <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    </head>
+    <body>
+
+        <div th:replace="tema_icono :: svg"></div>    
+
+        <div th:replace="tema :: div"></div>
+
+        <div th:replace="iconos :: svg"></div>
+
+        <main class="d-flex flex-nowrap">
+            <h1 class="visually-hidden">Sidebars examples</h1>
+
+            <div th:replace="menu :: div"></div>
+
+            <!-- Aqui tendria que ir mi información (Lista, Nuevo, Editar -->
+            <div class="container">
+                <hr>
+                <form action="/presentacion/buscar" method="post">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" name="desc" placeholder="Ingrese descripcion" >
+                        <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Buscar</button>
+                    </div>
+                </form>
+                <center><img src="/tipo.2.png" class="img-fluid" alt="foto" width="30%"></center>
+                
+                <hr>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Codigo</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Nombre Corto</th>
+                            <th scope="col">Eliminar</th>
+                            <th scope="col">Editar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="presentacion,x : ${presentacion}">
+                            <th th:text="${x.count}" scope="row"></th>
+                            <td th:text="${presentacion.codigo}"></td>
+                            <td th:text="${presentacion.nombre}"></td>
+                            <td th:text="${presentacion.nombreC}"></td>
+                            <td>
+                                <a th:href="@{/presentacion/eliminar(cod=${presentacion.codigo})}" target="_self" style="color:red;">
+                                    <i class="bi bi-x-circle-fill"></i>
+                                </a>
+                            </td>
+                            <td>
+                                <a th:href="@{/presentacion/editar(cod=${presentacion.codigo})}" target="_self" style="color:green;">
+                                    <i class="bi bi-pencil-square"></i>
+                                </a>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+
+                <div class="d-grid gap-2">
+                    <a th:href="@{/presentacion/nuevo}" class="btn btn-success" >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus" viewBox="0 0 16 16">
+                        <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+                        <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+                        </svg> Agregar
+                    </a>
+                </div>
+
+            </div>  
+        </main>
+
+    </body>
+</html>
